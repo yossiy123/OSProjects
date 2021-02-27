@@ -5,6 +5,7 @@ using OSProjects.Services.ProjectService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace OSProjects.Controllers
@@ -21,6 +22,7 @@ namespace OSProjects.Controllers
         }
 
         [HttpGet]
+        [Route("All")]
         public async Task<IActionResult> GetAllProjects()
         {
             IActionResult actionResult;

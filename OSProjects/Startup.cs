@@ -27,6 +27,7 @@ namespace OSProjects
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddRazorPages();
 
             // Mapper
 
@@ -51,6 +52,7 @@ namespace OSProjects
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapRazorPages();
             });
         }
     }
