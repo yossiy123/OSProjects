@@ -51,12 +51,10 @@ namespace OSProjects
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors("MyPolicy");
-
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors("MyPolicy");
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
