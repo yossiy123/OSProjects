@@ -11,6 +11,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using OSProjects.Data;
+using IBM.EntityFrameworkCore;
+using IBM.EntityFrameworkCore.Storage.Internal;
 
 namespace OSProjects
 {
@@ -26,6 +29,7 @@ namespace OSProjects
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DataContext>(options => options.UseDb2(Configuration.GetConnectionString("DefaultConnection"), p => p.SetServerInfo(IBMDBServerType.IDS, IBMDBServerVersion.IDS_12_10_2000)));
             services.AddControllers();
             services.AddRazorPages();
 
