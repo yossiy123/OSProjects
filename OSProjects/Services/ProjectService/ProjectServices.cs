@@ -1,24 +1,21 @@
-﻿using OSProjects.Dtos.Project;
+﻿using OSProjects.Data;
+using OSProjects.Dtos.Project;
 using OSProjects.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace OSProjects.Services.ProjectService
 {
     public class ProjectServices : IProjectServices
     {
-        private List<Project> _Projects;
+        private readonly DataContext _Context;
 
-        public ProjectServices()
+        public ProjectServices(DataContext context)
         {
-            this._Projects = new List<Project>()
-            {
-                new Project() { Id = 1, Name = "Important project", Description = "Very important project"},
-                new Project() { Id = 2, Name = "Interesting project", Description = "Very interesting project"},
-                new Project() { Id = 3, Name = "Bad project", Description = "Very bad project"},
-            };
+            this._Context = context;
         }
 
         public async Task<ServiceResponse<List<GetProjectDto>>> GetAllProjects()
@@ -26,7 +23,7 @@ namespace OSProjects.Services.ProjectService
             ServiceResponse<List<GetProjectDto>> response = new ServiceResponse<List<GetProjectDto>>();
             try
             {
-                List<GetProjectDto> projects = this._Projects.Select(i_Project => i_Project.ToGetDto()).ToList();
+                List<GetProjectDto> projects = await this._Context.Projects.Select(i_Project => i_Project.ToGetDto()).ToListAsync();
                 response.Data = projects;
             }
             catch (Exception ee)
@@ -43,8 +40,8 @@ namespace OSProjects.Services.ProjectService
             ServiceResponse<GetProjectDto> response = new ServiceResponse<GetProjectDto>();
             try
             {
-                GetProjectDto project = this._Projects.First(i_Project => i_Project.Id == id).ToGetDto();
-                response.Data = project;
+                Project project = await this._Context.Projects.FirstAsync(i_Project => i_Project.Id == id);
+                response.Data = project.ToGetDto();
             }
             catch (Exception ee)
             {

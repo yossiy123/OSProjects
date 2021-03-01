@@ -9,13 +9,13 @@ namespace OSProjects.Data
 {
     public class DataContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        public DbSet<Project> Projects { get; set; }
+
+        public DataContext(DbContextOptions<DataContext> options)
+            : base(options: options)
         {
 
         }
-
-        public DbSet<Project> Projects { get; set; }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -29,8 +29,11 @@ namespace OSProjects
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(options => options.UseDb2(Configuration.GetConnectionString("DefaultConnection"), p => p.SetServerInfo(IBMDBServerType.IDS, IBMDBServerVersion.IDS_12_10_2000)));
+            services.AddDbContext<DataContext>(i_Options => i_Options.UseDb2(Configuration.GetConnectionString("DefaultConnection"),
+                                               i_Context => i_Context.SetServerInfo(IBMDBServerType.IDS, IBMDBServerVersion.IDS_12_10_2000)));
+
             services.AddControllers();
+
             services.AddRazorPages();
 
             // Mapper
