@@ -30,7 +30,7 @@ namespace OSProjects
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(i_Options => i_Options.UseDb2(Configuration.GetConnectionString("DefaultConnection"),
-                                               i_Context => i_Context.SetServerInfo(IBMDBServerType.IDS, IBMDBServerVersion.IDS_12_10_2000)));
+                                               i_Context => i_Context.SetServerInfo(IBMDBServerType.AS400, IBMDBServerVersion.AS400_07_02)));
 
             services.AddControllers();
 
