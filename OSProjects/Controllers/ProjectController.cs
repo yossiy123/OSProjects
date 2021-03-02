@@ -69,7 +69,7 @@ namespace OSProjects.Controllers
                 }
                 else
                 {
-                    throw new Exception("Failed get all projects");
+                    actionResult = BadRequest(response);
                 }
             }
             catch (Exception ee)
