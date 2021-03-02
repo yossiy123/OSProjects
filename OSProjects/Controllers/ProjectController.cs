@@ -30,24 +30,16 @@ namespace OSProjects.Controllers
             IActionResult actionResult;
             ServiceResponse<List<GetProjectDto>> response;
 
-            try
-            {
-                response = await this._ProjectServices.GetAllProjects();
+            response = await this._ProjectServices.GetAllProjects();
 
-                if (response.Success)
-                {
-                    actionResult = Ok(response);
-                }
-                else
-                {
-                    actionResult = BadRequest(response);
-                }
-            }
-            catch (Exception ee)
+            if (response.Success)
             {
-                actionResult = BadRequest(ee);
+                actionResult = Ok(response);
             }
-
+            else
+            {
+                actionResult = BadRequest(response);
+            }
 
             return actionResult;
         }
@@ -59,24 +51,16 @@ namespace OSProjects.Controllers
             IActionResult actionResult;
             ServiceResponse<GetProjectDto> response;
 
-            try
-            {
-                response = await this._ProjectServices.GetProject(id);
+            response = await this._ProjectServices.GetProject(id);
 
-                if (response.Success)
-                {
-                    actionResult = Ok(response);
-                }
-                else
-                {
-                    actionResult = BadRequest(response);
-                }
-            }
-            catch (Exception ee)
+            if (response.Success)
             {
-                actionResult = BadRequest(ee);
+                actionResult = Ok(response);
             }
-
+            else
+            {
+                actionResult = BadRequest(response);
+            }
 
             return actionResult;
         }
